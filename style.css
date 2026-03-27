@@ -96,7 +96,6 @@ section {
 .innhold {
     /* For å oppnå en layout med innhold relativt sentrert, også med venstrejustert tekst, og bakgrunner som fyller hele bredden, legges innhold i en stylet div inni section elementene. Slik får section elementene dekke hele bredden med sin bakgrunn mens div'ene inni gis marginer. */
     margin: 0px 20%;
-    /* background: rgba(255, 255, 255, 0.8); */
 }
 
 #dagens_spesial .innhold {
