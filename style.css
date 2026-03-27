@@ -93,16 +93,6 @@ section {
     padding-bottom: 50px;
 }
 
-/* Følgende funker ikke, tekst kan ikke ta linear-gradient, må bruke background-image og clip-path workaround eventuelt. :grøss: */
-/* #hero h1 {
-    color: linear-gradient(
-        45deg,
-        rgba(63, 94, 251, 1) 0%,
-        rgba(123, 255, 0, 1) 49%,
-        rgba(255, 0, 195, 1) 100%
-    );
-} */
-
 .innhold {
     /* For å oppnå en layout med innhold relativt sentrert, også med venstrejustert tekst, og bakgrunner som fyller hele bredden, legges innhold i en stylet div inni section elementene. Slik får section elementene dekke hele bredden med sin bakgrunn mens div'ene inni gis marginer. */
     margin: 0px 20%;
