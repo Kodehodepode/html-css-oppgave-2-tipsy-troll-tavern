@@ -1,0 +1,173 @@
+* {
+    box-sizing: border-box;
+    /*
+    Uten denne regelen legges marginer og padding til andre spesifiserte størrelser.
+    Dette kan ha overraskende konsekvenser og legge til unødvendige scrollbars.
+ 
+    Med denne regelen inkluderes padding og marginer i et elements spesifiserte størrelse
+    og vi får direkte kontroll over den totale størrelsen uten å måtte regne den ut fra
+    marginer som kanskje er nettleseren som har spesifisert selv.
+    */
+}
+
+body {
+    color: white;
+    margin: 0; /* Fjerner default marginer, ellers blir andre utregninger feil. */
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100dvh; /* "Dynamic viewport height", bildestørrelsen justert for menyer etc. */
+    background-image: url("./bilder/tretekstur.jpg"); /* https://architextures.org/create/782 */
+}
+
+header h1 {
+    font-size: 68px;
+    font-family: "Bigelow Rules";
+    margin: 20px 40px;
+    position: relative; /* Lar oss posisjonere det kommende ::after pseudo-elementet med dette h1 elementet som referanse (nærmeste ikke-statisk posisjonerte element) */
+}
+
+/* Gi overskriften en tåkelagt skygge. */
+header h1::after {
+    content: "Tipsy Troll Tavern"; /* Legger til tekst "etter" h1 elementet */
+    display: block;
+    color: black;
+    position: absolute; /* Lar oss posisjonere over eller under hovedelementet */
+    top: 2px; /* Flytter teksten litt ned fra overskriften */
+    left: 2px; /* Flytter teksten litt til høyre fra overskriften */
+    z-index: -1; /* Flytter teksten under overskriften */
+    filter: blur(5px); /* Tåkeeffekt */
+}
+
+nav a {
+    display: inline-block; /* Uten denne tar ikke linken plassen den skal og det ser ut som noe på siden har negativ margin-top eller margin-bottom. Skjønner ikke helt hvorfor det skjer med inline elementer enda, velger inline-block inntil jeg forstår mer. */
+    background: rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    color: white;
+    padding: 20px;
+    text-transform: uppercase;
+    /* font-weight: bold; */
+    letter-spacing: 3px; /* https://www.w3schools.com/cssref/pr_text_letter-spacing.php */
+    border-radius: 10px;
+    corner-shape: bevel; /* Funker ikke i Firefox enda, som faller fint tilbake på runde hjørner. */
+    margin-right: 10px;
+}
+
+nav a:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+footer {
+    padding: 4px;
+    background: black;
+    width: 100%;
+}
+
+header,
+section {
+    flex-grow: 1; /* Section elementene vokser for å fylle plassen tilgjengelig, slik at footeren blir nederst også hvis siden ikke har nok innhold til det. */
+    width: 100%;
+}
+
+#dagens_spesial img {
+    width: 200px;
+}
+
+#hero {
+    width: 100%;
+    padding: 20px 0px;
+    margin: 20px 0px; /* Litt luft over og under, ingen på sidene */
+    background: #000;
+    background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 1) 20%,
+        rgba(0, 0, 0, 1) 80%,
+        rgba(0, 0, 0, 0) 100%
+    );
+    /* rgba() lar oss velge en "alfaverdi" som beskriver gjennomsiktighet på bakgrunnen, uten å sette transparens på elementet.
+     linear-gradient tar en verdi for retning, og så en liste fargeverdier og posisjon i gradienten. */
+    font-family: Garamond;
+    font-size: 1.5rem;
+    padding-bottom: 50px;
+}
+
+/* Følgende funker ikke, tekst kan ikke ta linear-gradient, må bruke background-image og clip-path workaround eventuelt. :grøss: */
+/* #hero h1 {
+    color: linear-gradient(
+        45deg,
+        rgba(63, 94, 251, 1) 0%,
+        rgba(123, 255, 0, 1) 49%,
+        rgba(255, 0, 195, 1) 100%
+    );
+} */
+
+.innhold {
+    /* For å oppnå en layout med innhold relativt sentrert, også med venstrejustert tekst, og bakgrunner som fyller hele bredden, legges innhold i en stylet div inni section elementene. Slik får section elementene dekke hele bredden med sin bakgrunn mens div'ene inni gis marginer. */
+    margin: 0px 20%;
+    /* background: rgba(255, 255, 255, 0.8); */
+}
+
+#dagens_spesial .innhold {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    img {
+        width: 100%;
+    }
+    h2 {
+        position: absolute;
+        top: -64px;
+        left: 20px;
+        font-family: "Bigelow Rules";
+        font-size: 48px;
+        z-index: 3;
+    }
+
+    p.beskrivelse {
+        position: relative;
+        bottom: 100px;
+        left: 500px;
+        width: 400px;
+        text-align: right;
+        z-index: 9001; /* Over 9000, definitivt øverst. */
+        background: rgba(0, 0, 0, 0.3);
+        padding: 10px;
+    }
+}
+#dagens_spesial .innhold h2::after {
+    content: "Dagens Spesial"; /* Legger til tekst "etter" h1 elementet */
+    display: block;
+    width: 500px;
+    color: black;
+    position: absolute; /* Lar oss posisjonere over eller under hovedelementet */
+    top: 2px; /* Flytter teksten litt ned fra overskriften */
+    left: 2px; /* Flytter teksten litt til høyre fra overskriften */
+    filter: blur(5px);
+    z-index: -1;
+}
+
+#kontakt form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 40px;
+
+    textarea {
+        max-width: 100%;
+        height: 10em;
+    }
+
+    button {
+        width: 100px;
+        height: 30px;
+        background: black;
+        color: white;
+        border-radius: 10px;
+        corner-shape: bevel;
+        border: none;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+    }
+}
